@@ -1,0 +1,674 @@
+{
+  "rarity_scale": {
+    "1": "Comum – Encontros frequentes",
+    "2": "Incomum – Encontros ocasionais",
+    "3": "Raro – Encontros difíceis",
+    "4": "Muito Raro – Encontros extremamente raros",
+    "5": "Lendário – Pokémon lendários ou únicos"
+  },
+  "environments": {
+    "Florestas e Bosques": {
+      "description": "Áreas com árvores densas, grama alta e clima úmido.",
+      "rarities": {
+        "1": [
+          "Caterpie",
+          "Metapod",
+          "Weedle",
+          "Kakuna",
+          "Oddish",
+          "Bellsprout",
+          "Spinarak",
+          "Hoppip",
+          "Pidgey",
+          "Sentret",
+          "Ledyba",
+          "Paras",
+          "Petilil",
+          "Budew"
+        ],
+        "2": [
+          "Butterfree",
+          "Beedrill",
+          "Venonat",
+          "Pineco",
+          "Natu",
+          "Gloom",
+          "Weepinbell",
+          "Skiploom",
+          "Chikorita"
+        ],
+        "3": [
+          "Parasect",
+          "Yanma",
+          "Aipom",
+          "Victreebel",
+          "Vileplume",
+          "Noctowl"
+        ],
+        "4": [
+          "Scyther",
+          "Heracross",
+          "Forretress",
+          "Ursaring"
+        ],
+        "5": [
+          "Celebi"
+        ]
+      }
+    },
+    "Campos e Planícies": {
+      "description": "Áreas abertas e vastas com vegetação baixa.",
+      "rarities": {
+        "1": [
+          "Rattata",
+          "Sentret",
+          "Mareep",
+          "Hoppip",
+          "Doduo",
+          "Girafarig",
+          "Snubbull",
+          "Tauros",
+          "Miltank"
+        ],
+        "2": [
+          "Nidoran♂",
+          "Nidoran♀",
+          "Flaaffy",
+          "Raticate",
+          "Furret",
+          "Granbull",
+          "Aipom",
+          "Stantler"
+        ],
+        "3": [
+          "Dodrio",
+          "Ampharos",
+          "Dunsparce",
+          "Farfetch’d",
+          "Lickitung"
+        ],
+        "4": [
+          "Espeon",
+          "Umbreon",
+          "Nidoqueen",
+          "Nidoking"
+        ],
+        "5": [
+          "Raikou",
+          "Entei"
+        ]
+      }
+    },
+    "Montanhas e Cavernas": {
+      "description": "Regiões de difícil acesso e escuras.",
+      "rarities": {
+        "1": [
+          "Zubat",
+          "Geodude",
+          "Sandshrew",
+          "Machop",
+          "Diglett",
+          "Cleffa",
+          "Igglybuff"
+        ],
+        "2": [
+          "Graveler",
+          "Machoke",
+          "Dugtrio",
+          "Clefairy",
+          "Onix",
+          "Cubone",
+          "Marowak",
+          "Jigglypuff",
+          "Aron",
+          "Lunatone",
+          "Solrock"
+        ],
+        "3": [
+          "Larvitar",
+          "Pupitar",
+          "Rhydon",
+          "Steelix"
+        ],
+        "4": [
+          "Tyranitar",
+          "Donphan",
+          "Golem",
+          "Kangaskhan",
+          "Hitmonlee",
+          "Hitmonchan"
+        ],
+        "5": [
+          "Lugia",
+          "Ho-Oh"
+        ]
+      }
+    },
+    "Áreas Vulcânicas": {
+      "description": "Regiões quentes e rochosas.",
+      "rarities": {
+        "1": [
+          "Slugma",
+          "Magmar",
+          "Growlithe"
+        ],
+        "2": [
+          "Magcargo",
+          "Ponyta",
+          "Vulpix",
+          "Cyndaquil"
+        ],
+        "3": [
+          "Rapidash",
+          "Arcanine",
+          "Houndour"
+        ],
+        "4": [
+          "Houndoom",
+          "Flareon",
+          "Charmander"
+        ],
+        "5": [
+          "Entei"
+        ]
+      }
+    },
+    "Áreas Aquáticas (Lagos e Rios)": {
+      "description": "Corpos de água doce.",
+      "rarities": {
+        "1": [
+          "Magikarp",
+          "Goldeen",
+          "Poliwag",
+          "Wooper",
+          "Psyduck",
+          "Remoraid"
+        ],
+        "2": [
+          "Poliwhirl",
+          "Tentacool",
+          "Shellder",
+          "Feebas"
+        ],
+        "3": [
+          "Seaking",
+          "Slowpoke",
+          "Corsola",
+          "Qwilfish",
+          "Poliwrath"
+        ],
+        "4": [
+          "Lapras",
+          "Slowbro",
+          "Slowking"
+        ],
+        "5": [
+          "Suicune"
+        ]
+      }
+    },
+    "Oceanos e Mares": {
+      "description": "Águas salgadas profundas.",
+      "rarities": {
+        "1": [
+          "Tentacool",
+          "Magikarp",
+          "Wingull",
+          "Feebas",
+          "Remoraid"
+        ],
+        "2": [
+          "Tentacruel",
+          "Staryu",
+          "Shellder",
+          "Octillery"
+        ],
+        "3": [
+          "Dewgong",
+          "Cloyster",
+          "Mantyke"
+        ],
+        "4": [
+          "Gyarados",
+          "Dratini",
+          "Lapras"
+        ],
+        "5": [
+          "Lugia"
+        ]
+      }
+    },
+    "Áreas Urbanas": {
+      "description": "Cidades e vilas.",
+      "rarities": {
+        "1": [
+          "Rattata",
+          "Meowth",
+          "Magnemite",
+          "Voltorb",
+          "Murkrow",
+          "Snubbull",
+          "Plusle",
+          "Minun",
+          "Pichu"
+        ],
+        "2": [
+          "Persian",
+          "Magneton",
+          "Jigglypuff",
+          "Electrode",
+          "Togepi",
+          "Grimer"
+        ],
+        "3": [
+          "Porygon",
+          "Porygon2",
+          "Ditto",
+          "Tyrogue",
+          "Koffing",
+          "Chansey",
+          "Mr. Mime"
+        ],
+        "4": [
+          "Eevee",
+          "Umbreon",
+          "Espeon",
+          "Snorlax"
+        ],
+        "5": []
+      }
+    },
+    "Cemitérios e Áreas Assombradas": {
+      "description": "Locais sombrios e místicos.",
+      "rarities": {
+        "1": [
+          "Zubat",
+          "Murkrow",
+          "Rattata",
+          "Poochyena",
+          "Gastly"
+        ],
+        "2": [
+          "Haunter",
+          "Misdreavus",
+          "Cubone",
+          "Drowzee",
+          "Duskull",
+          "Shuppet"
+        ],
+        "3": [
+          "Gengar",
+          "Sneasel",
+          "Wobbuffet",
+          "Absol"
+        ],
+        "4": [
+          "Mismagius",
+          "Umbreon",
+          "Banette"
+        ],
+        "5": [
+          "Darkrai",
+          "Giratina"
+        ]
+      }
+    },
+    "Usinas e Áreas Industriais": {
+      "description": "Zonas elétricas e industriais.",
+      "rarities": {
+        "1": [
+          "Magnemite",
+          "Voltorb",
+          "Electrike",
+          "Grimer",
+          "Koffing",
+          "Plusle",
+          "Minun",
+          "Pichu",
+          "Emolga",
+          "Joltik"
+        ],
+        "2": [
+          "Magneton",
+          "Electrode",
+          "Pikachu",
+          "Jolteon",
+          "Mawile"
+        ],
+        "3": [
+          "Electabuzz",
+          "Raichu",
+          "Porygon",
+          "Skarmory"
+        ],
+        "4": [
+          "Ampharos",
+          "Porygon2",
+          "Porygon-Z"
+        ],
+        "5": [
+          "Zapdos"
+        ]
+      }
+    },
+    "Pântanos e Áreas Alagadas": {
+      "description": "Terrenos lamacentos e úmidos com vegetação densa, ideais para Pokémon aquáticos, venenosos e terrestres adaptados a esse ambiente.",
+      "rarities": {
+        "1": [
+          "Poliwag",
+          "Wooper",
+          "Hoppip",
+          "Bellsprout",
+          "Oddish",
+          "Paras",
+          "Venonat",
+          "Skorupi"
+        ],
+        "2": [
+          "Gloom",
+          "Quagsire",
+          "Croagunk",
+          "Bellosom",
+          "Carnivine",
+          "Anorith"
+        ],
+        "3": [
+          "Parasect",
+          "Weepinbell",
+          "Jumpluff",
+          "Ariados",
+          "Bulbasaur",
+          "Mudkip"
+        ],
+        "4": [
+          "Drapion",
+          "Swampert",
+          "Victreebel"
+        ],
+        "5": [
+          "Celebi"
+        ]
+      }
+    },
+    "Desertos e Dunas": {
+      "description": "Regiões áridas com temperaturas extremas, areia e rochas, ideais para Pokémon terrestres e resistentes ao calor.",
+      "rarities": {
+        "1": [
+          "Sandshrew",
+          "Diglett",
+          "Cacnea",
+          "Geodude",
+          "Skorupi",
+          "Gligar"
+        ],
+        "2": [
+          "Graveler",
+          "Dugtrio",
+          "Cubone",
+          "Rhyhorn",
+          "Sandslash",
+          "Solrock",
+          "Carnivine",
+          "Maractus"
+        ],
+        "3": [
+          "Donphan",
+          "Phanpy",
+          "Rhydon",
+          "Larvitar",
+          "Charmander",
+          "Gliscor",
+          "Gible"
+        ],
+        "4": [
+          "Tyranitar",
+          "Kangaskhan",
+          "Golem",
+          "Cacturne"
+        ],
+        "5": [
+          "Ho-Oh"
+        ]
+      }
+    },
+    "Ruínas Antigas, Templos Perdidos, Cemitérios e lugares com energia grande": {
+      "description": "Lugares esquecidos pelo tempo, cheios de segredos e histórias antigas. Comuns para Pokémon psíquicos, fantasmas e terrestres resistentes.",
+      "rarities": {
+        "1": [
+          "Unown",
+          "Rhyhorn",
+          "Geodude",
+          "Natu",
+          "Drowzee",
+          "Venonat",
+          "Abra",
+          "Onix",
+          "Aron",
+          "Lunatone",
+          "Anorith"
+        ],
+        "2": [
+          "Xatu",
+          "Graveler",
+          "Haunter",
+          "Kabuto",
+          "Omanyte",
+          "Togetic",
+          "Kadabra",
+          "Absol"
+        ],
+        "3": [
+          "Gengar",
+          "Rhydon",
+          "Slowking",
+          "Misdreavus"
+        ],
+        "4": [
+          "Machamp",
+          "Steelix",
+          "Aerodactyl",
+          "Alakazam",
+          "Golem"
+        ],
+        "5": [
+          "Lugia",
+          "Ho-Oh"
+        ]
+      }
+    },
+    "Zonas de Neve e Gelo": {
+      "description": "Regiões congeladas com neve densa e geleiras. Perfeitas para Pokémon de gelo e alguns aquáticos.",
+      "rarities": {
+        "1": [
+          "Seel",
+          "Swinub",
+          "Shellder",
+          "Sneasel",
+          "Delibird",
+          "Glalie",
+          "Snorunt"
+        ],
+        "2": [
+          "Dewgong",
+          "Piloswine",
+          "Cloyster",
+          "Smoochum",
+          "Pachirisu"
+        ],
+        "3": [
+          "Jynx",
+          "Lapras",
+          "Weavile",
+          "Mamoswine"
+        ],
+        "4": [
+        
+        ],
+        "5": [
+            "Articuno",
+            "Regice"
+        ]
+      }
+    },
+    "Terras Ermas e Campos Abandonados": {
+      "description": "Locais esquecidos e áridos, com pouco movimento humano e Pokémon adaptados à sobrevivência.",
+      "rarities": {
+        "1": [
+          "Rattata",
+          "Meowth",
+          "Ekans",
+          "Pidgey",
+          "Mankey",
+          "Spearow"
+        ],
+        "2": [
+          "Persian",
+          "Raticate",
+          "Arbok",
+          "Fearow",
+          "Exeggcute",
+          "Munchlax"
+        ],
+        "3": [
+          "Granbull",
+          "Stantler",
+          "Donphan",
+          "Primeape"
+        ],
+        "4": [
+          "Houndoom",
+          "Kangaskhan",
+          "Snorlax"
+        ],
+        "5": [
+            "Entei"
+        ]
+      }
+    },
+    "Áreas de Céu Aberto e Montanhas Altas": {
+      "description": "Locais de alta altitude, geralmente habitados por Pokémon voadores.",
+      "rarities": {
+        "1": [
+          "Pidgey",
+          "Spearow",
+          "Hoothoot",
+          "Gligar",
+          "Doduo",
+          "Farfetch’d"
+        ],
+        "2": [
+          "Pidgeotto",
+          "Noctowl",
+          "Fearow",
+          "Dodrio",
+          "Emolga"
+        ],
+        "3": [
+         "Pidgeot",
+         "Aerodactyl",
+         "Skarmory"
+        ],
+        "4": [
+          "Togekiss"
+        ],
+        "5": [
+            "Lugia"
+        ]
+      }
+    },
+    "Campos Floridos e Zonas Arbustivas": {
+      "description": "Áreas cheias de flores e arbustos, onde Pokémon de tipo grama e inseto são predominantes.",
+      "rarities": {
+        "1": [
+          "Oddish",
+          "Caterpie",
+          "Weedle",
+          "Hoppip",
+          "Spinarak",
+          "Petilil",
+          "Sewaddle"
+        ],
+        "2": [
+          "Butterfree",
+          "Beedrill",
+          "Sunflora",
+          "Sunkern",
+          "Tangela",
+          "Exeggcute",
+          "Chikorita",
+          "Bulbasaur"
+        ],
+        "3": [
+          "Bellossom",
+          "Jumpluff",
+          "Pinsir",
+          "Scyther"
+        ],
+        "4": [
+          "Heracross",
+          "Ledian"
+        ],
+        "5": [
+            "Celebi"
+        ]
+      }
+    },
+    "Fazendas e Regiões Rurais": {
+      "description": "Áreas agrícolas e rurais, onde Pokémon de tipo normal, grama e inseto são comuns.",
+      "rarities": {
+        "1": [
+         "Mareep", "Sentret", "Rattata", "Pidgey", "Zigzagon", "Mankey", "Sewaddle"
+        ],
+        "2": [
+          "Flaaffy", "Furret", "Tauros", "Miltank", "Chikorita"
+        ],
+        "3": [
+          "Ampharos", "Girafarig"
+        ],
+        "4": [
+          "Eevee"
+        ],
+        "5": [
+            
+        ]
+      }
+    },
+    "Exclusivos Good Rod (15k)": {
+      "description": "Disponíveis apenas com vara de pesca.",
+      "rarities": {
+        "1": [
+          "Krabby",
+          "Shellder",
+          "Chinchou",
+          "Horsea",
+          "Marill",
+          "Staryu",
+          "Slowpoke"
+        ],
+        "2": [
+          "Seadra",
+          "Lanturn",
+          "Azumarill",
+          "Mantyke",
+          "Dratini",
+          "Omanyte"
+        ],
+        "3": [
+          "Kabuto",
+          "Kingler",
+          "Squirtle",
+          "Totodile",
+          "Mudkip"
+        ],
+        "4": [
+          "Kingdra",
+          "Wartortle",
+          "Mantine",
+          "Marshtomp",
+          "Dragonair"
+        ],
+        "5": []
+      }
+    }
+  }
+}
