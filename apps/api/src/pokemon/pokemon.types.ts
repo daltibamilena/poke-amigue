@@ -17,4 +17,5 @@ export interface PokemonEncounterSummary {
   number: number | null;
   level: { level: string; roll: number };
   gender: string;
+  nature: string | null;
 }

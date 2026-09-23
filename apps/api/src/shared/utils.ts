@@ -3,6 +3,46 @@ export function randomFromArray<T>(arr: T[] | null | undefined): T | null {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function normalizePokemonName(name: string): string {
+  return name
+    .trim()
+    .toLowerCase()
+    .replace(/['.]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export async function findPokemonFileData<T = Record<string, unknown>>(
+  pokemonName: string | null,
+  readJson: <U>(filename: string) => Promise<U>,
+  listDirectory: (directory: string) => Promise<string[]>,
+  directory = 'src/shared/data/pokemon',
+): Promise<T | null> {
+  if (!pokemonName) {
+    return null;
+  }
+
+  const normalizedTarget = normalizePokemonName(pokemonName);
+
+  try {
+    const files = await listDirectory(directory);
+    const match = files.find((file) => {
+      const fileName = file.replace(/\.json$/i, '');
+      return normalizePokemonName(fileName) === normalizedTarget;
+    });
+
+    if (!match) {
+      return null;
+    }
+
+    return await readJson<T>(`${directory}/${match}`);
+  } catch (error) {
+    console.error('Failed to find pokemon data file:', error);
+    return null;
+  }
+}
+
 export function getPokemonGender(): string {
   return randomFromArray(['male', 'female']) || 'male';
 }
@@ -40,4 +80,22 @@ export async function getPokemonNumber(
     console.error('Failed to read pokemon number data:', error);
     return null;
   }
+}
+
+export async function getRandomNatureName(
+  readJson: <T>(filename: string) => Promise<T>,
+): Promise<string | null> {
+  try {
+    const data = await readJson<Record<string, Record<string, number>>>('natures.json');
+    const names = Object.keys(data);
+    return randomFromArray(names);
+  } catch (error) {
+    console.error('Failed to read natures data:', error);
+    return null;
+  }
+}
+
+export function getExperienceForLevel(level: number): number {
+  // replace with your actual formula or lookup table
+  return Math.floor(level * 40);
 }

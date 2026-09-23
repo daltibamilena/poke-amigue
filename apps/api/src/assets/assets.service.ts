@@ -20,4 +20,9 @@ export class AssetsService {
     const raw = await fs.readFile(filePath, 'utf8');
     return JSON.parse(raw) as T;
   }
+
+  async listDirectory(directory: string): Promise<string[]> {
+    const fullPath = this.resolve(directory);
+    return fs.readdir(fullPath);
+  }
 }

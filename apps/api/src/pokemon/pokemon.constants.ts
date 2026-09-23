@@ -20,3 +20,6 @@ export const enviromentsValue: EnvironmentsMap = {
   17: 'Fazendas e Regiões Rurais',
   18: 'Exclusivos Good Rod (15k)',
 };
+
+
+export const defaultAttributes = "{STR=0, DEX=0, CON=0, INT=0, WIS=0, CHA=0}"

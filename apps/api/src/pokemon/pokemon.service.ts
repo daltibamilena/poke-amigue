@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AssetsService } from '../assets/assets.service';
-import { getPokemonGender, getPokemonNumber, levelFromD20, randomFromArray, rarityFromD20 } from '../shared/utils';
+import { getPokemonGender, getPokemonNumber, getRandomNatureName, levelFromD20, randomFromArray, rarityFromD20 } from '../shared/utils';
 import { enviromentsValue } from './pokemon.constants';
 import { EnvironmentEntry, EnvironmentsMap, PokemonDataFile, PokemonEncounterSummary } from './pokemon.types';
 
@@ -81,6 +81,7 @@ export class PokemonService {
       number: await getPokemonNumber(pokemon, this.readJson.bind(this)),
       level: levelFromD20(),
       gender: getPokemonGender(),
+      nature: await getRandomNatureName(this.readJson.bind(this)),
     };
   }
 }
