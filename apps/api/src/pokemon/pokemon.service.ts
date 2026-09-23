@@ -1,12 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { AssetsService } from '../assets/assets.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { getPokemonGender, getPokemonNumber, getRandomNatureName, levelFromD20, randomFromArray, rarityFromD20 } from '../shared/utils';
 import { enviromentsValue } from './pokemon.constants';
 import { EnvironmentEntry, EnvironmentsMap, PokemonDataFile, PokemonEncounterSummary } from './pokemon.types';
 
 @Injectable()
 export class PokemonService {
-  constructor(private readonly assetsService: AssetsService) {}
+  constructor(
+    private readonly assetsService: AssetsService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   private async readJson<T>(filename: string): Promise<T> {
     return this.assetsService.readJson<T>(filename);
@@ -58,7 +62,7 @@ export class PokemonService {
     };
   }
 
-  async getPokemonEncounter(environmentId: number): Promise<PokemonEncounterSummary> {
+  async getPokemonEncounter(environmentId: number, userId?: number): Promise<PokemonEncounterSummary> {
     if (environmentId < 1 || environmentId > 18) {
       throw new Error('Invalid environment ID. Must be between 1 and 18.');
     }
@@ -73,15 +77,37 @@ export class PokemonService {
     const rarity = rarityFromD20();
     const pokemons = data.environments[environment]?.rarities[String(rarity)] ?? [];
     const pokemon = randomFromArray<string>(pokemons);
+    const number = await getPokemonNumber(pokemon, this.readJson.bind(this));
+    const level = levelFromD20();
+    const gender = getPokemonGender();
+    const nature = await getRandomNatureName(this.readJson.bind(this));
 
-    return {
+    const encounter = {
       environment,
       rarity,
       pokemon,
-      number: await getPokemonNumber(pokemon, this.readJson.bind(this)),
-      level: levelFromD20(),
-      gender: getPokemonGender(),
-      nature: await getRandomNatureName(this.readJson.bind(this)),
+      number,
+      level,
+      gender,
+      nature,
     };
+
+    if (userId) {
+      await this.prisma.encounterLog.create({
+        data: {
+          userId,
+          environment,
+          rarity,
+          pokemon,
+          number,
+          level: level.level,
+          levelRoll: level.roll,
+          gender,
+          nature,
+        },
+      });
+    }
+
+    return encounter;
   }
 }

@@ -10,7 +10,8 @@
     "dev:web": "npm run dev --workspace apps/web",
     "build": "npm run build --workspace apps/api && npm run build --workspace apps/web",
     "start:api": "npm run start:prod --workspace apps/api",
-    "preview:web": "npm run preview --workspace apps/web"
+    "preview:web": "npm run preview --workspace apps/web",
+    "db:init": "node scripts/init-prisma-db.js"
   },
   "description": "This project is a lightweight monorepo with:",
   "main": "index.js",

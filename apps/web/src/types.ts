@@ -19,3 +19,19 @@ export type EnvironmentOption = {
   id: number;
   label: string;
 };
+
+export type AuthUser = {
+  id: number;
+  username: string;
+};
+
+export type LoginResponse = {
+  accessToken: string;
+  user: AuthUser;
+};
+
+export type RegisterResponse = {
+  id: number;
+  username: string;
+  createdAt: string;
+};

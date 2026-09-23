@@ -1,7 +1,15 @@
-import { useEffect, useState } from 'react';
-import { fetchEnvironments, fetchHealth, fetchPokemonEncounter } from './api';
-import { EncounterCard } from './components/EncounterCard';
+import { useEffect, useMemo, useState } from 'react';
+import {
+  AUTH_TOKEN_KEY,
+  fetchEnvironments,
+  fetchHealth,
+  fetchPokemonEncounter,
+  loginUser,
+  registerUser,
+} from './api';
 import { EnvironmentOption, HealthResponse, PokemonRouteResponse } from './types';
+import { EncounterPage } from './pages/EncounterPage';
+import { LoginPage } from './pages/LoginPage';
 
 export default function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -10,6 +18,25 @@ export default function App() {
   const [result, setResult] = useState<PokemonRouteResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [activeRoute, setActiveRoute] = useState('environments');
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return Boolean(window.localStorage.getItem(AUTH_TOKEN_KEY));
+  });
+  const [token, setToken] = useState<string | null>(() => {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
+    return window.localStorage.getItem(AUTH_TOKEN_KEY);
+  });
 
   useEffect(() => {
     const loadInitialData = async () => {
@@ -30,13 +57,23 @@ export default function App() {
     void loadInitialData();
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      window.localStorage.setItem(AUTH_TOKEN_KEY, token);
+      setIsAuthenticated(true);
+    } else {
+      window.localStorage.removeItem(AUTH_TOKEN_KEY);
+      setIsAuthenticated(false);
+    }
+  }, [token]);
+
   const fetchPokemonRoute = async (value: number) => {
     setLoading(true);
     try {
-      const data = await fetchPokemonEncounter(value);
+      const data = await fetchPokemonEncounter(value, token ?? undefined);
       setResult(data);
       setActiveRoute(`/pokemon/encounter/${value}`);
-    } catch {
+    } catch (error) {
       setResult({
         environment: 'error',
         rarity: 0,
@@ -46,6 +83,7 @@ export default function App() {
         gender: 'error',
         nature: null,
       });
+      setAuthError(error instanceof Error ? error.message : 'Unable to fetch encounter.');
     } finally {
       setLoading(false);
     }
@@ -60,88 +98,77 @@ export default function App() {
       return;
     }
 
+    if (!token) {
+      setAuthError('Please log in before accessing encounters.');
+      return;
+    }
+
     void fetchPokemonRoute(value);
   };
 
+  const handleAuthSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!username.trim() || !password.trim()) {
+      setAuthError('Username and password are required.');
+      return;
+    }
+
+    setAuthLoading(true);
+    setAuthError('');
+
+    try {
+      if (authMode === 'login') {
+        const response = await loginUser(username.trim(), password);
+        setToken(response.accessToken);
+      } else {
+        await registerUser(username.trim(), password);
+        const response = await loginUser(username.trim(), password);
+        setToken(response.accessToken);
+      }
+
+      setPassword('');
+    } catch (error) {
+      setAuthError(error instanceof Error ? error.message : 'Authentication failed.');
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    setToken(null);
+    setResult(null);
+    setEnvironmentId('');
+    setAuthError('');
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <LoginPage
+        authMode={authMode}
+        username={username}
+        password={password}
+        authError={authError}
+        authLoading={authLoading}
+        onChangeMode={setAuthMode}
+        onUsernameChange={setUsername}
+        onPasswordChange={setPassword}
+        onSubmit={handleAuthSubmit}
+      />
+    );
+  }
+
   return (
-    <main
-      style={{
-        fontFamily: 'sans-serif',
-        padding: '2rem',
-        maxWidth: '1100px',
-        margin: '0 auto',
-        background: '#221b31',
-        color: '#f9fafb',
-        minHeight: '100vh',
-        boxSizing: 'border-box',
-      }}
-    >
-      <h1 style={{ color: '#f9fafb' }}>PokeAmigue</h1>
-      <p style={{ color: '#d1d5db' }}>Frontend for the Pokémon API routes.</p>
-
-      <div style={{ marginBottom: '1rem', color: '#e5e7eb' }}>
-        <strong>API status:</strong>{' '}
-        {health ? `${health.status} (${health.service})` : 'Loading...'}
-      </div>
-
-      <div
-        style={{
-          marginTop: '1.5rem',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.75rem',
-          color: '#f3f4f6',
-        }}
-      >
-        <label htmlFor="environmentId" style={{ color: '#e5e7eb' }}>
-          Environment:
-        </label>
-        <select
-          id="environmentId"
-          value={environmentId}
-          onChange={handleEnvironmentChange}
-          style={{
-            width: '260px',
-            padding: '0.5rem',
-            background: '#1f2937',
-            color: '#f9fafb',
-            border: '1px solid #374151',
-            borderRadius: '8px',
-          }}
-        >
-          <option value="" style={{ background: '#1f2937', color: '#f9fafb' }}>
-            Select an environment
-          </option>
-          {environmentOptions.map((option) => (
-            <option
-              key={option.id}
-              value={option.id}
-              style={{ background: '#1f2937', color: '#f9fafb' }}
-            >
-              {option.id} - {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div style={{ marginTop: '1.5rem', color: '#f3f4f6' }}>
-        <h2 style={{ color: '#f9fafb' }}>Active route</h2>
-        <p style={{ color: '#d1d5db' }}>{activeRoute}</p>
-      </div>
-
-      <div style={{ marginTop: '1.5rem', color: '#f3f4f6' }}>
-        <h2 style={{ color: '#f9fafb' }}>Resultado</h2>
-        <EncounterCard result={result} loading={loading} />
-      </div>
-    </main>
+    <EncounterPage
+      health={health}
+      environmentOptions={environmentOptions}
+      environmentId={environmentId}
+      result={result}
+      loading={loading}
+      activeRoute={activeRoute}
+      username={username || 'trainer'}
+      onEnvironmentChange={handleEnvironmentChange}
+      onLogout={handleLogout}
+    />
   );
 }
-
-const buttonStyle = {
-  padding: '0.8rem 1rem',
-  borderRadius: '8px',
-  border: '1px solid #ddd',
-  background: '#111827',
-  color: '#fff',
-  cursor: 'pointer',
-} as const;

@@ -1,4 +1,6 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { PokemonService } from './pokemon.service';
 
 @Controller()
@@ -24,10 +26,12 @@ export class PokemonController {
     return this.pokemonService.getEnvironmentPokemon(environmentId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('pokemon/encounter/:environmentId')
   async getPokemonEncounter(
     @Param('environmentId', ParseIntPipe) environmentId: number,
+    @CurrentUser() user: { id: number; username: string },
   ) {
-    return this.pokemonService.getPokemonEncounter(environmentId);
+    return this.pokemonService.getPokemonEncounter(environmentId, user.id);
   }
 }
